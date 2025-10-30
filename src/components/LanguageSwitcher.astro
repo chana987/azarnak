@@ -1,0 +1,76 @@
+---
+import { getTranslations, getLocaleFromRequest, getAvailableLocales, type Locale } from '../i18n';
+
+const currentLocale = getLocaleFromRequest(Astro.request);
+const { t } = getTranslations(currentLocale);
+const availableLocales = getAvailableLocales();
+
+const localeNames: Record<Locale, string> = {
+  en: 'English',
+  he: 'עברית'
+};
+---
+
+<div class="language-switcher">
+  {availableLocales.map((locale) => (
+    <a
+      href={`?locale=${locale}`}
+      class:list={['locale-btn', { active: locale === currentLocale }]}
+      data-locale={locale}
+    >
+      {localeNames[locale]}
+    </a>
+  ))}
+</div>
+
+<style>
+  .language-switcher {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .locale-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    background: white;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+  }
+
+  .locale-btn:hover {
+    background: #f5f5f5;
+    border-color: #999;
+  }
+
+  .locale-btn.active {
+    background: #007bff;
+    color: white;
+    border-color: #007bff;
+  }
+</style>
+
+<script>
+  // Client-side language switching
+  document.addEventListener('DOMContentLoaded', () => {
+    const languageSwitcher = document.querySelector('.language-switcher');
+    if (!languageSwitcher) return;
+
+    languageSwitcher.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (target.classList.contains('locale-btn')) {
+        e.preventDefault();
+        const locale = target.getAttribute('data-locale');
+        if (locale) {
+          // Set cookie
+          document.cookie = `locale=${locale}; path=/; max-age=${60 * 60 * 24 * 365}`; // 1 year
+          // Reload page
+          window.location.reload();
+        }
+      }
+    });
+  });
+</script>

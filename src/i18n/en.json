@@ -1,0 +1,59 @@
+{
+  "common": {
+    "appName": "Azarnak",
+    "loading": "Loading stocks...",
+    "error": "Error:",
+    "logout": "Logout"
+  },
+  "auth": {
+    "signInTitle": "Sign in with Google",
+    "signInDescription": "Please sign in with your Google account to view your stock portfolio from Google Sheets.",
+    "signInButton": "Sign in with Google",
+    "signInHelp": "You'll be redirected to Google to authorize access to your spreadsheet.",
+    "pleaseSignInAgain": "Please try logging in again or check your Google API credentials.",
+    "notAuthenticated": "Not authenticated",
+    "authenticationExpired": "Authentication expired",
+    "failedToInitiateAuth": "Failed to initiate authentication"
+  },
+  "errors": {
+    "failedToFetchStocks": "Failed to fetch stocks",
+    "noDataFound": "No data found in spreadsheet",
+    "failedToFetchFromSheets": "Failed to fetch data from Google Sheets",
+    "authenticationError": "Authentication Error",
+    "missingAuthCode": "Missing Authorization Code",
+    "authenticationFailed": "Authentication Failed",
+    "goBackHome": "Go back home",
+    "goBackAndTryAgain": "Go back and try again"
+  },
+  "errorPages": {
+    "missingAuthCode": {
+      "title": "Missing Authorization Code",
+      "description": "The OAuth callback did not receive an authorization code.",
+      "checkTitle": "Please make sure:",
+      "checks": [
+        "Your redirect URI is correctly configured in Google Cloud Console",
+        "It should be: http://localhost:4321/api/auth/callback",
+        "The GOOGLE_CLIENT_ID and GOOGLE_CLIENT_SECRET are set in your .env file"
+      ]
+    },
+    "authFailed": {
+      "title": "Authentication Failed",
+      "checkTitle": "Please check:",
+      "checks": [
+        "Your Google Cloud Console credentials are correct",
+        "The redirect URI matches exactly",
+        "Google Sheets API is enabled in your project"
+      ]
+    }
+  },
+  "stock": {
+    "portfolio": "Stock Portfolio",
+    "exchange": "Exchange:",
+    "ticker": "Ticker:",
+    "officialName": "Official Name:"
+  },
+  "meta": {
+    "direction": "ltr",
+    "lang": "en"
+  }
+}

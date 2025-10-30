@@ -1,0 +1,59 @@
+{
+  "common": {
+    "appName": "עזרנק",
+    "loading": "טוען מניות...",
+    "error": "שגיאה:",
+    "logout": "התנתק"
+  },
+  "auth": {
+    "signInTitle": "התחבר עם Google",
+    "signInDescription": "אנא התחבר עם חשבון Google שלך כדי לצפות בתיק המניות שלך מ-Google Sheets.",
+    "signInButton": "התחבר עם Google",
+    "signInHelp": "תועבר ל-Google כדי לאשר גישה לגיליון האלקטרוני שלך.",
+    "pleaseSignInAgain": "אנא נסה להתחבר שוב או בדוק את האישורים שלך ל-Google API.",
+    "notAuthenticated": "לא מאומת",
+    "authenticationExpired": "האימות פג",
+    "failedToInitiateAuth": "נכשל בהפעלת האימות"
+  },
+  "errors": {
+    "failedToFetchStocks": "נכשל בטעינת מניות",
+    "noDataFound": "לא נמצא מידע בגיליון האלקטרוני",
+    "failedToFetchFromSheets": "נכשל בטעינת מידע מ-Google Sheets",
+    "authenticationError": "שגיאת אימות",
+    "missingAuthCode": "קוד אימות חסר",
+    "authenticationFailed": "האימות נכשל",
+    "goBackHome": "חזור לדף הבית",
+    "goBackAndTryAgain": "חזור ונסה שוב"
+  },
+  "errorPages": {
+    "missingAuthCode": {
+      "title": "קוד אימות חסר",
+      "description": "ה-callback של OAuth לא קיבל קוד אימות.",
+      "checkTitle": "אנא וודא:",
+      "checks": [
+        "כתובת ה-redirect URI מוגדרת נכון ב-Google Cloud Console",
+        "הכתובת צריכה להיות: http://localhost:4321/api/auth/callback",
+        "ה-GOOGLE_CLIENT_ID וה-GOOGLE_CLIENT_SECRET מוגדרים בקובץ .env שלך"
+      ]
+    },
+    "authFailed": {
+      "title": "האימות נכשל",
+      "checkTitle": "אנא בדוק:",
+      "checks": [
+        "האישורים שלך ב-Google Cloud Console נכונים",
+        "כתובת ה-redirect URI תואמת בדיוק",
+        "ה-API של Google Sheets מופעל בפרויקט שלך"
+      ]
+    }
+  },
+  "stock": {
+    "portfolio": "תיק מניות",
+    "exchange": "בורסה:",
+    "ticker": "סימול:",
+    "officialName": "שם רשמי:"
+  },
+  "meta": {
+    "direction": "rtl",
+    "lang": "he"
+  }
+}

@@ -1,0 +1,12 @@
+IMPORTANT: Restart your dev server!
+
+The Astro configuration has been updated to enable server-side rendering.
+
+To restart:
+
+1. In your terminal where "yarn dev" is running, press Ctrl+C to stop the server
+2. Run: yarn dev
+3. Wait for the server to start
+4. Visit http://localhost:4321
+
+The error about Astro.request.headers should now be resolved!

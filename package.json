@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@astrojs/netlify": "^6.6.0",
-    "astro": "^5.15.2"
+    "astro": "^5.15.2",
+    "google-auth-library": "^10.4.2",
+    "googleapis": "^164.1.0"
   }
 }

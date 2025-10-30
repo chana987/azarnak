@@ -1,0 +1,57 @@
+
+---
+import { getTranslations, type Locale } from '../i18n';
+
+interface StockProps {
+  company: string;
+  hebrewName?: string;
+  exchange: string;
+  ticker: string;
+  officialName?: string;
+  todaysPrice?: string;
+  currency?: string;
+  normalizedToILS?: string;
+  locale: Locale;
+}
+
+const { t } = getTranslations(Astro.props.locale);
+---
+
+<div class="stock-card">
+  <div class="stock-header">
+    <h2>{Astro.props.company}</h2>
+    {Astro.props.hebrewName && <p class="hebrew-name">{Astro.props.hebrewName}</p>}
+  </div>
+
+  <div class="stock-details">
+    <div class="detail-row">
+      <span class="label">{t('stock.exchange')}</span>
+      <span class="value">{Astro.props.exchange}</span>
+    </div>
+    <div class="detail-row">
+      <span class="label">{t('stock.ticker')}</span>
+      <span class="value ticker">{Astro.props.ticker}</span>
+    </div>
+    {
+      Astro.props.officialName && (
+        <div class="detail-row">
+          <span class="label">{t('stock.officialName')}</span>
+          <span class="value">{Astro.props.officialName}</span>
+        </div>
+      )
+    }
+  </div>
+
+  {
+    Astro.props.todaysPrice && (
+      <div class="price-section">
+        <div class="price">
+          {Astro.props.todaysPrice} {Astro.props.currency}
+        </div>
+        {Astro.props.normalizedToILS && (
+          <div class="normalized-price">{Astro.props.normalizedToILS} ILS</div>
+        )}
+      </div>
+    )
+  }
+</div>
