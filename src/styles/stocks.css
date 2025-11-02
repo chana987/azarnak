@@ -1,119 +1,6 @@
-#container {
-  font-family: Inter, Roboto, "Helvetica Neue", "Arial Nova", "Nimbus Sans",
-    Arial, sans-serif;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  padding: 20px;
-}
-
-main {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-#stocks-section {
-  padding: 20px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-}
-
-h1 {
-  font-size: 2.5rem;
-  color: white;
-  margin: 0;
-  font-weight: 600;
-}
-
-.logout-btn {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
-  padding: 0.75rem 1.5rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 500;
-  transition: background 0.2s;
-  backdrop-filter: blur(10px);
-}
-
-.logout-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.auth-prompt {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 3rem;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 500px;
-  margin: 2rem auto;
-}
-
-.auth-prompt h2 {
-  font-size: 1.75rem;
-  color: #111827;
-  margin: 0 0 1rem 0;
-  font-weight: 600;
-}
-
-.auth-prompt p {
-  color: #6b7280;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-
-.login-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.75rem;
-  background: white;
-  color: #111827;
-  padding: 1rem 2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1.1rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: box-shadow 0.2s, transform 0.2s;
-  border: 1px solid #e5e7eb;
-}
-
-.login-btn:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  transform: translateY(-2px);
-}
-
-.login-btn svg {
-  flex-shrink: 0;
-}
-
-.error,
-.loading {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 2rem;
-  border-radius: 12px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.error {
-  color: #dc2626;
-}
-
-.error .help-text {
-  color: #6b7280;
-  margin-top: 0.5rem;
-  font-size: 0.9rem;
-}
-
-.loading {
-  color: #4b5563;
-}
+/* ===================================
+   Stock Grid & Cards
+   =================================== */
 
 .stocks-grid {
   display: grid;
@@ -152,7 +39,6 @@ h1 {
   color: #6b7280;
   font-size: 0.95rem;
   margin: 0;
-  direction: rtl;
   text-align: right;
 }
 
@@ -209,18 +95,4 @@ h1 {
   font-size: 1rem;
   color: #6b7280;
   font-weight: 500;
-}
-
-@media screen and (max-width: 768px) {
-  h1 {
-    font-size: 2rem;
-  }
-
-  .stocks-grid {
-    grid-template-columns: 1fr;
-  }
-
-  #stocks-section {
-    padding: 10px;
-  }
 }

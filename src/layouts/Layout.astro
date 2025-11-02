@@ -1,5 +1,7 @@
 ---
 import { getTranslations, getLocaleFromRequest } from '../i18n';
+import LanguageSwitcher from '../components/LanguageSwitcher.astro';
+import '../styles/global.css';
 
 const locale = getLocaleFromRequest(Astro.request);
 const { t, direction, lang } = getTranslations(locale);
@@ -12,9 +14,15 @@ const { t, direction, lang } = getTranslations(locale);
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
 		<title>{t('common.appName')}</title>
 	</head>
 	<body>
+		<div class="language-switcher-container">
+			<LanguageSwitcher />
+		</div>
 		<slot />
 	</body>
 </html>
@@ -25,5 +33,13 @@ const { t, direction, lang } = getTranslations(locale);
 		margin: 0;
 		width: 100%;
 		height: 100%;
+		font-family: 'Rubik', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	}
+
+	.language-switcher-container {
+		position: fixed;
+		bottom: .1rem;
+		right: .1rem;
+		z-index: 1000;
 	}
 </style>

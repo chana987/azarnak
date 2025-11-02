@@ -1,0 +1,77 @@
+---
+import type { Action } from '../types/stocks';
+import type { Locale } from '../i18n';
+import { formatDate, formatCurrency } from '../lib/portfolio';
+import { getTranslations } from '../i18n';
+
+interface Props {
+  actions: Action[];
+  locale: Locale;
+}
+
+const { actions, locale } = Astro.props;
+const { t } = getTranslations(locale);
+
+// Sort actions by date (newest first)
+const sortedActions = [...actions].sort((a, b) => {
+  const dateA = new Date(a.Date).getTime();
+  const dateB = new Date(b.Date).getTime();
+  return dateB - dateA;
+});
+---
+
+<div class="actions-list">
+  <h2>{t('portfolio.transactionHistory')}</h2>
+
+  <div class="actions-table-container">
+    <table class="actions-table">
+      <thead>
+        <tr>
+          <th>{t('portfolio.date')}</th>
+          <th>{t('portfolio.type')}</th>
+          <th>{t('portfolio.company')}</th>
+          <th>{t('portfolio.amount')}</th>
+          <th>{t('portfolio.pricePerShare')}</th>
+          <th>{t('portfolio.currency')}</th>
+          <th>{t('portfolio.priceILS')}</th>
+          <th>{t('portfolio.totalILS')}</th>
+          <th>{t('portfolio.currentValue')}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {sortedActions.map((action) => (
+          <tr class={action.Type === 'BUY' ? 'buy-action' : 'sell-action'}>
+            <td class="date-cell">{formatDate(action.Date, locale === 'he' ? 'he-IL' : 'en-US')}</td>
+            <td>
+              <span class={`action-badge ${action.Type === 'BUY' ? 'buy' : 'sell'}`}>
+                {action.Type}
+              </span>
+            </td>
+            <td>
+              <div class="company-cell">
+                <div class="company-name">{action.Company}</div>
+                {action['Hebrew Name'] && <div class="hebrew-name">{action['Hebrew Name']}</div>}
+              </div>
+            </td>
+            <td class="number">{parseFloat(action.Amount).toFixed(2)}</td>
+            <td class="number">{action['V/S at Purchase']}</td>
+            <td class="center">{action.Currency}</td>
+            <td class="number">{formatCurrency(parseFloat(action['V/S at Purchase (ILS)']) || 0, locale === 'he' ? 'he-IL' : 'en-US')}</td>
+            <td class="number strong">{formatCurrency(parseFloat(action['Total Purchase Value (ILS)']) || 0, locale === 'he' ? 'he-IL' : 'en-US')}</td>
+            <td class="number">{formatCurrency(parseFloat(action['Total Current Value (ILS)']) || 0, locale === 'he' ? 'he-IL' : 'en-US')}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="actions-summary">
+    <p>
+      {t('portfolio.totalActions')}: <strong>{actions.length}</strong>
+      {' | '}
+      {t('portfolio.purchases')}: <strong class="buy">{actions.filter(a => a.Type === 'BUY').length}</strong>
+      {' | '}
+      {t('portfolio.sales')}: <strong class="sell">{actions.filter(a => a.Type === 'SELL').length}</strong>
+    </p>
+  </div>
+</div>

@@ -1,5 +1,4 @@
 ---
-import "../styles/stocks.css";
 import StockCard from "./StockCard.astro";
 import { getTranslations, getLocaleFromRequest } from '../i18n';
 
@@ -7,10 +6,10 @@ const locale = getLocaleFromRequest(Astro.request);
 const { t } = getTranslations(locale);
 
 interface StockCard {
-  Company: string;
   "Hebrew Name": string;
   Exchange: string;
   Ticker: string;
+  "Traded As": string;
   "Official Name": string;
   "Today's Price": string;
   Currency: string;
@@ -52,13 +51,20 @@ if (hasAuth) {
     <section id="stocks-section">
       <div class="header">
         <h1>{t('stock.portfolio')}</h1>
-        {
-          hasAuth && (
-            <a href="/api/auth/logout" class="logout-btn">
-              {t('common.logout')}
-            </a>
-          )
-        }
+        <div class="header-actions">
+          {
+            hasAuth && (
+              <>
+                <a href="/portfolio" class="portfolio-link">
+                  {t('portfolio.pageTitle')}
+                </a>
+                <a href="/api/auth/logout" class="logout-btn">
+                  {t('common.logout')}
+                </a>
+              </>
+            )
+          }
+        </div>
       </div>
 
       {
@@ -110,10 +116,10 @@ if (hasAuth) {
           <div class="stocks-grid">
             {stocks.map((stock) => (
               <StockCard
-                company={stock.Company}
                 hebrewName={stock["Hebrew Name"]}
                 exchange={stock.Exchange}
                 ticker={stock.Ticker}
+                tradedAs={stock["Traded As"]}
                 officialName={stock["Official Name"]}
                 todaysPrice={stock["Today's Price"]}
                 currency={stock.Currency}

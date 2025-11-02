@@ -1,0 +1,81 @@
+---
+import type { PortfolioSummary } from '../types/stocks';
+import type { Locale } from '../i18n';
+import { formatCurrency, formatPercentage } from '../lib/portfolio';
+import { getTranslations } from '../i18n';
+
+interface Props {
+  summary: PortfolioSummary;
+  locale: Locale;
+}
+
+const { summary, locale } = Astro.props;
+const { t } = getTranslations(locale);
+
+const profitLossClass = summary.totalProfitLoss >= 0 ? 'profit' : 'loss';
+---
+
+<div class="portfolio-summary">
+  <h2>{t('portfolio.summary')}</h2>
+
+  <div class="summary-stats">
+    <div class="stat-card">
+      <div class="stat-label">{t('portfolio.totalInvested')}</div>
+      <div class="stat-value">{formatCurrency(summary.totalInvested, locale === 'he' ? 'he-IL' : 'en-US')}</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-label">{t('portfolio.currentValue')}</div>
+      <div class="stat-value">{formatCurrency(summary.currentValue, locale === 'he' ? 'he-IL' : 'en-US')}</div>
+    </div>
+
+    <div class={`stat-card ${profitLossClass}`}>
+      <div class="stat-label">{t('portfolio.profitLoss')}</div>
+      <div class="stat-value">
+        {formatCurrency(summary.totalProfitLoss, locale === 'he' ? 'he-IL' : 'en-US')}
+        <span class="percentage">({formatPercentage(summary.totalProfitLossPercentage)})</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="holdings-section">
+    <h3>{t('portfolio.currentHoldings')}</h3>
+    <div class="holdings-table-container">
+      <table class="holdings-table">
+        <thead>
+          <tr>
+            <th>{t('portfolio.company')}</th>
+            <th>{t('portfolio.account')}</th>
+            <th>{t('portfolio.shares')}</th>
+            <th>{t('portfolio.avgPrice')}</th>
+            <th>{t('portfolio.invested')}</th>
+            <th>{t('portfolio.currentValue')}</th>
+            <th>{t('portfolio.pl')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {summary.holdings.map((holding) => (
+            <tr>
+              <td>
+                <div class="company-cell">
+                  <div class="company-name">{holding.company}</div>
+                  {holding.hebrewName && <div class="hebrew-name">{holding.hebrewName}</div>}
+                </div>
+              </td>
+              <td>{holding.account}</td>
+              <td class="number">{holding.totalShares.toFixed(2)}</td>
+              <td class="number">{formatCurrency(holding.averagePurchasePrice, locale === 'he' ? 'he-IL' : 'en-US')}</td>
+              <td class="number">{formatCurrency(holding.totalInvested, locale === 'he' ? 'he-IL' : 'en-US')}</td>
+              <td class="number">{formatCurrency(holding.currentValue, locale === 'he' ? 'he-IL' : 'en-US')}</td>
+              <td class={`number ${holding.profitLoss >= 0 ? 'profit' : 'loss'}`}>
+                {formatCurrency(holding.profitLoss, locale === 'he' ? 'he-IL' : 'en-US')}
+                <br />
+                <span class="small">({formatPercentage(holding.profitLossPercentage)})</span>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

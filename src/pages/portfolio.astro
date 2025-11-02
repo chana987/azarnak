@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PortfolioSummary from '../components/PortfolioSummary.astro';
+import ActionsList from '../components/ActionsList.astro';
+import type { Action } from '../types/stocks';
+import { calculatePortfolioSummary, getUsers } from '../lib/portfolio';
+import { getTranslations, getLocaleFromRequest } from '../i18n';
+
+// Get locale from cookie or default to 'en'
+const locale = getLocaleFromRequest(Astro.request);
+const { t } = getTranslations(locale);
+
+// Fetch actions from the API
+let actions: Action[] = [];
+let error: string | null = null;
+let needsAuth = false;
+let selectedUser: string | null = null;
+
+try {
+  // Get the selected user from query params
+  const url = new URL(Astro.request.url);
+  selectedUser = url.searchParams.get('user');
+
+  const response = await fetch(`${url.origin}/api/actions`, {
+    headers: {
+      Cookie: Astro.request.headers.get('Cookie') || '',
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    if (errorData.needsAuth) {
+      needsAuth = true;
+    } else {
+      error = errorData.error || 'Failed to fetch actions';
+    }
+  } else {
+    actions = await response.json();
+  }
+} catch (e) {
+  error = e instanceof Error ? e.message : 'Unknown error occurred';
+}
+
+// Get list of all users
+const users = getUsers(actions);
+
+// If no user selected and we have users, select the first one
+if (!selectedUser && users.length > 0) {
+  selectedUser = users[0];
+}
+
+// Calculate portfolio for selected user
+const portfolioSummary = selectedUser && actions.length > 0
+  ? calculatePortfolioSummary(actions, selectedUser)
+  : null;
+---
+
+<Layout title={t('portfolio.pageTitle')} locale={locale}>
+  <div class="container">
+    <div class="header">
+      <h1>{t('portfolio.title')}</h1>
+      <a href="/" class="back-link">
+        {t('portfolio.backToHome')}
+      </a>
+    </div>
+
+    {needsAuth && (
+      <div class="auth-prompt">
+        <p>{t('portfolio.pleaseSignIn')}</p>
+        <a href="/api/auth/login" class="sign-in-button">
+          {t('auth.signInButton')}
+        </a>
+      </div>
+    )}
+
+    {error && !needsAuth && (
+      <div class="error-message">
+        <p>{t('portfolio.errorLoadingData')}: {error}</p>
+      </div>
+    )}
+
+    {!needsAuth && !error && actions.length === 0 && (
+      <div class="no-data">
+        <p>{t('portfolio.noActions')}</p>
+      </div>
+    )}
+
+    {!needsAuth && !error && actions.length > 0 && (
+      <div class="portfolio-content">
+        {users.length > 1 && (
+          <div class="user-selector">
+            <label for="user-select">
+              {t('portfolio.selectUser')}
+            </label>
+            <select id="user-select" onchange="window.location.href='?user=' + this.value">
+              {users.map((user) => (
+                <option value={user} selected={user === selectedUser}>
+                  {user}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
+
+        {selectedUser && (
+          <div class="user-portfolio">
+            <div class="user-header">
+              <h2>{locale === 'he' ? `${t('portfolio.userPortfolioPrefix')}${selectedUser}` : `${selectedUser}${t('portfolio.userPortfolio')}`}</h2>
+            </div>
+
+            {portfolioSummary && (
+              <>
+                <PortfolioSummary summary={portfolioSummary} locale={locale} />
+                <ActionsList actions={portfolioSummary.actions} locale={locale} />
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    )}
+  </div>
+</Layout>

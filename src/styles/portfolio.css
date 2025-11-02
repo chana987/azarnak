@@ -1,0 +1,454 @@
+.actions-list {
+  margin: 3rem 0;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+.actions-table-container {
+  overflow-x: auto;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1rem;
+}
+
+.actions-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.actions-table thead {
+  background: #f5f5f5;
+  border-bottom: 2px solid #e0e0e0;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.actions-table th {
+  padding: 1rem 0.75rem;
+  text-align: left;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.actions-table td {
+  padding: 0.875rem 0.75rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.actions-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.actions-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.buy-action {
+  border-left: 3px solid #22c55e;
+}
+
+.sell-action {
+  border-left: 3px solid #ef4444;
+}
+
+.action-badge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.action-badge.buy {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+.action-badge.sell {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.company-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.company-name {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.hebrew-name {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.date-cell {
+  white-space: nowrap;
+}
+
+.number {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.center {
+  text-align: center;
+}
+
+.strong {
+  font-weight: 600;
+}
+
+.actions-summary {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.actions-summary p {
+  margin: 0;
+  color: #666;
+}
+
+.actions-summary strong {
+  color: #1a1a1a;
+  font-size: 1.1rem;
+}
+
+.actions-summary strong.buy {
+  color: #22c55e;
+}
+
+.actions-summary strong.sell {
+  color: #ef4444;
+}
+
+@media (max-width: 768px) {
+  .actions-table {
+    font-size: 0.75rem;
+  }
+
+  .actions-table th,
+  .actions-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .action-badge {
+    padding: 0.2rem 0.5rem;
+    font-size: 0.65rem;
+  }
+}
+
+.portfolio-summary {
+  margin: 2rem 0;
+}
+
+h2 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: #1a1a1a;
+}
+
+h3 {
+  font-size: 1.4rem;
+  margin: 2rem 0 1rem;
+  color: #1a1a1a;
+}
+
+.summary-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card.profit {
+  border-left: 4px solid #22c55e;
+}
+
+.stat-card.loss {
+  border-left: 4px solid #ef4444;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.stat-card.profit .stat-value {
+  color: #22c55e;
+}
+
+.stat-card.loss .stat-value {
+  color: #ef4444;
+}
+
+.percentage {
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+.holdings-table-container {
+  overflow-x: auto;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.holdings-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.holdings-table thead {
+  background: #f5f5f5;
+  border-bottom: 2px solid #e0e0e0;
+}
+
+.holdings-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #1a1a1a;
+  white-space: nowrap;
+}
+
+.holdings-table td {
+  padding: 1rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.holdings-table tbody tr:hover {
+  background: #fafafa;
+}
+
+.holdings-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.company-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.company-name {
+  font-weight: 500;
+  color: #1a1a1a;
+}
+
+.hebrew-name {
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.number {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.profit {
+  color: #22c55e;
+  font-weight: 500;
+}
+
+.loss {
+  color: #ef4444;
+  font-weight: 500;
+}
+
+.small {
+  font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .summary-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .holdings-table {
+    font-size: 0.75rem;
+  }
+
+  .holdings-table th,
+  .holdings-table td {
+    padding: 0.75rem 0.5rem;
+  }
+
+  .stat-value {
+    font-size: 1.25rem;
+  }
+}
+
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.back-link {
+  color: #0066cc;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #0052a3;
+  text-decoration: underline;
+}
+
+.auth-prompt,
+.error-message,
+.no-data {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.auth-prompt {
+  border-left: 4px solid #0066cc;
+}
+
+.error-message {
+  border-left: 4px solid #ef4444;
+  color: #b91c1c;
+}
+
+.no-data {
+  border-left: 4px solid #f59e0b;
+}
+
+.sign-in-button {
+  display: inline-block;
+  background: #4285f4;
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 1rem;
+  transition: background 0.2s;
+}
+
+.sign-in-button:hover {
+  background: #357ae8;
+}
+
+.user-selector {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-selector label {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.user-selector select {
+  padding: 0.5rem 1rem;
+  border: 1px solid #d0d0d0;
+  border-radius: 4px;
+  font-size: 1rem;
+  background: white;
+  cursor: pointer;
+  min-width: 200px;
+}
+
+.user-selector select:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+.user-header {
+  margin-bottom: 1.5rem;
+}
+
+.user-header h2 {
+  font-size: 2rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-selector {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .user-selector select {
+    width: 100%;
+  }
+}
